@@ -1,10 +1,9 @@
 # Electron app with pouch db couchbase integration along with redux store
 
-# Build
-yarn install
+# Build Command -> yarn install | npm install 
 
-# Run
-yarn run
 
-# Output 
-Electon application will open in pc
+# Run Command -> yarn start | npm start
+
+
+# Output  -> Electon application will open in pc
