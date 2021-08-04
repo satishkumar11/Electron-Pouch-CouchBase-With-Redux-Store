@@ -11,9 +11,13 @@ const { ipcRenderer } = electron;
 
 class BookContainer extends Component {
 
+    componentDidUpdate() {
+        console.log("buyBook : "+this.props.numOfBooks);
+        console.log("latestPouchDBResponse : "+JSON.stringify(this.props.latestPouchDBResponse));
+    }
+
     sendIpcData = async () => {
 
-        console.log("sendIpcData2");
         this.props.addToPouch();
         // const result = await ipcRenderer.invoke('user-data', 'Satish')
         // console.log("<result app> : " + JSON.stringify(result));
@@ -33,6 +37,20 @@ class BookContainer extends Component {
                     >Send IPC Data(2)
                     </Button>
                 </Box>
+                <Box textAlign='center'>
+                    <p style={{
+                        marginTop: '5em',
+                    }}> No. of Books {this.props.numOfBooks} </p>
+                    <Button variant='contained'
+                        onClick={e => {
+                            this.props.buyBook();
+                        }}
+                        style={{
+                            marginTop: '1em',
+                        }}
+                    >Buy Book
+                    </Button>
+                </Box>
             </div>
         );
     }
@@ -40,7 +58,8 @@ class BookContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        numOfBooks: state.numOfBooks
+        numOfBooks: state.numOfBooks,
+        latestPouchDBResponse: state.latestPouchDBResponse,
     }
 }
 

@@ -1,0 +1,1 @@
+export const combineState = (state, object) => Object.assign({}, state, object);

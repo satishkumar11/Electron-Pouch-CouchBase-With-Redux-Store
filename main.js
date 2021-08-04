@@ -5,7 +5,13 @@ const PouchDB = require('pouchdb')
 PouchDB.plugin(require('pouchdb-find'));
 const localSkuDB = new PouchDB('src/data');
 const { v4: uuidv4 } = require('uuid');
+const path = require('path')
+const os = require('os')
 
+const reactDevToolsPath = path.join(
+    os.homedir(),
+    '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.2_0'
+)
 
 async function addToPouchDB(arg) {
     let doc = {
@@ -23,7 +29,6 @@ async function addToPouchDB(arg) {
 // Electron IPC example
 ipcMain.handle('user-data', async function (event, arg) {
     const result = await addToPouchDB(arg);
-    console.log("<result main> : " + JSON.stringify(result));
     return result;
     //do child process or other data manipulation and name it manData
     // event.sender.send('manipulatedData', 'COOL info!');
@@ -54,10 +59,11 @@ localSkuDB.sync(remoteDB, { live: true, retry: true })
 
 // Module to control application life.
 const app = electron.app
+const session = electron.session
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
-const path = require('path')
+// const path = require('path')
 // const url = require('url')
 
 const isDev = process.env.ELECTRON_IS_DEV;
@@ -131,3 +137,6 @@ app.on('activate', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
+app.whenReady().then(async () => {
+    await session.defaultSession.loadExtension(reactDevToolsPath)
+})

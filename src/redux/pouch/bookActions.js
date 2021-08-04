@@ -1,4 +1,4 @@
-import { BUY_BOOK, ADD_TO_POUCH } from "./bookTypes"
+import { BUY_BOOK, ADD_TO_POUCH, SET_POUCH_DB_RESPONSE } from "./bookTypes"
 
 export const buyBook = () => {
     return {
@@ -7,8 +7,14 @@ export const buyBook = () => {
 }
 
 export const addToPouch = () => {
-    console.log("addToPouch");
     return {
         type: ADD_TO_POUCH,
+    }
+}
+
+export const setPouchDBResponse = latestPouchDBResponse => {
+    return {
+        type: SET_POUCH_DB_RESPONSE,
+        latestPouchDBResponse,
     }
 }

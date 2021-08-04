@@ -2,17 +2,17 @@
 import {
     takeLatest,
     all,
+    put,
 } from 'redux-saga/effects';
 
 import { ADD_TO_POUCH } from './bookTypes'
-
+import { setPouchDBResponse } from './bookActions'
 const electron = window.require('electron');
 const { ipcRenderer } = electron;
 
 function* fetchSkuTableData() {
-    console.log("fetchSkuTableData");
     const result = yield (ipcRenderer.invoke('user-data', 'Satish'));
-    console.log("<result app> : " + JSON.stringify(result));
+    yield put(setPouchDBResponse(result));
 }
 
 export function* actionWatcher() {
