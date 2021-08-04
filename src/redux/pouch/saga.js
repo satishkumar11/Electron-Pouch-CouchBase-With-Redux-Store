@@ -19,6 +19,7 @@ export function* actionWatcher() {
     yield takeLatest(ADD_TO_POUCH, fetchSkuTableData);
 }
 
+/* not required */
 export function* rootSaga() {
     yield all([actionWatcher()]);
 }

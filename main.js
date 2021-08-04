@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path')
 const os = require('os')
 
+/* https://www.electronjs.org/docs/tutorial/devtools-extension */
 const reactDevToolsPath = path.join(
     os.homedir(),
     '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.2_0'
