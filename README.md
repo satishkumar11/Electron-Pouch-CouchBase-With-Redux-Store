@@ -1,4 +1,4 @@
-# Electron app with pouch couchbase integration along with redux store
+# Electron app with pouch db couchbase integration along with redux store
 
 # Build
 yarn install
