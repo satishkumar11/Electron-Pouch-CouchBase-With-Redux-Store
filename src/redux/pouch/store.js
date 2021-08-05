@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware } from "redux";
-import bookReducer from "./bookReducer";
+import { createStore, applyMiddleware, compose } from "redux";
+import bookReducer from "./reducer";
 import createSagaMiddleware from 'redux-saga';
 import { actionWatcher, rootSaga } from './saga'
 

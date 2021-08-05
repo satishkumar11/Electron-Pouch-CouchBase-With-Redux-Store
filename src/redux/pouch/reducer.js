@@ -1,4 +1,4 @@
-import { BUY_BOOK, SET_POUCH_DB_RESPONSE } from "./bookTypes"
+import { BUY_BOOK, SET_POUCH_DB_RESPONSE } from "./actionTypes"
 import { combineState } from '../../utils/reducerUtils'
 const initialState = {
     numOfBooks: 10,

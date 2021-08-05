@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { buyBook, addToPouch } from '../redux/pouch/bookActions';
+import { buyBook, addToPouch } from '../redux/pouch/actions';
 import { connect } from 'react-redux';
 
 import {

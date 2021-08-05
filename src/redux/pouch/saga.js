@@ -5,13 +5,13 @@ import {
     put,
 } from 'redux-saga/effects';
 
-import { ADD_TO_POUCH } from './bookTypes'
-import { setPouchDBResponse } from './bookActions'
+import { ADD_TO_POUCH } from './actionTypes'
+import { setPouchDBResponse } from './actions'
 const electron = window.require('electron');
 const { ipcRenderer } = electron;
 
 function* fetchSkuTableData() {
-    const result = yield (ipcRenderer.invoke('user-data', 'Satish'));
+    const result = yield (ipcRenderer.invoke('user-data', 'Admin'));
     yield put(setPouchDBResponse(result));
 }
 
