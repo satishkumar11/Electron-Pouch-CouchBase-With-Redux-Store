@@ -1,10 +1,9 @@
 const electron = require('electron');
-const ipcMain = require('electron').ipcMain;
-
-const PouchDB = require('pouchdb')
-PouchDB.plugin(require('pouchdb-find'));
-const localSkuDB = new PouchDB('src/data');
-const { v4: uuidv4 } = require('uuid');
+// const ipcMain = require('electron').ipcMain;
+// const PouchDB = require('pouchdb')
+// PouchDB.plugin(require('pouchdb-find'));
+// const localSkuDB = new PouchDB('src/data');
+// const { v4: uuidv4 } = require('uuid');
 const path = require('path')
 const os = require('os')
 
@@ -14,49 +13,49 @@ const reactDevToolsPath = path.join(
     '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.2_0'
 )
 
-async function addToPouchDB(arg) {
-    let doc = {
-        _id: uuidv4(),
-        data: {
-            name: arg,
-            gender: "Male",
-        }
-    }
+// async function addToPouchDB(arg) {
+//     let doc = {
+//         _id: uuidv4(),
+//         data: {
+//             name: arg,
+//             gender: "Male",
+//         }
+//     }
 
-    let result = await localSkuDB.put(doc);
-    return result;
-}
+//     let result = await localSkuDB.put(doc);
+//     return result;
+// }
 
-// Electron IPC example
-ipcMain.handle('user-data', async function (event, arg) {
-    const result = await addToPouchDB(arg);
-    return result;
-    //do child process or other data manipulation and name it manData
-    // event.sender.send('manipulatedData', 'COOL info!');
-});
-
-
-const remoteDB = new PouchDB("http://localhost:4985/sku-db", {
-    auth: {
-        username: 'test_user',
-        password: 'test_user@123'
-    }
-})
+// // Electron IPC example
+// ipcMain.handle('user-data', async function (event, arg) {
+//     const result = await addToPouchDB(arg);
+//     return result;
+//     //do child process or other data manipulation and name it manData
+//     // event.sender.send('manipulatedData', 'COOL info!');
+// });
 
 
-localSkuDB.sync(remoteDB, { live: true, retry: true })
-    .on('change', function (change) {
-    })
-    .on('paused', function (info) {
-    })
-    .on('active', function (info) {
-    })
-    .on('denied', function (err) {
-    })
-    .on('complete', function () {
-    })
-    .on('error', function (err) {
-    });
+// const remoteDB = new PouchDB("http://localhost:4985/sku-db", {
+//     auth: {
+//         username: 'test_user',
+//         password: 'test_user@123'
+//     }
+// })
+
+
+// localSkuDB.sync(remoteDB, { live: true, retry: true })
+//     .on('change', function (change) {
+//     })
+//     .on('paused', function (info) {
+//     })
+//     .on('active', function (info) {
+//     })
+//     .on('denied', function (err) {
+//     })
+//     .on('complete', function () {
+//     })
+//     .on('error', function (err) {
+//     });
 
 // Module to control application life.
 const app = electron.app
@@ -141,3 +140,7 @@ app.on('activate', function () {
 app.whenReady().then(async () => {
     await session.defaultSession.loadExtension(reactDevToolsPath)
 })
+
+
+require('./pouchDB/sku.js');
+require('./pouchDB/index.js');

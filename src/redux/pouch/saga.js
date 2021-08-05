@@ -11,7 +11,8 @@ const electron = window.require('electron');
 const { ipcRenderer } = electron;
 
 function* fetchSkuTableData() {
-    const result = yield (ipcRenderer.invoke('user-data', 'Admin'));
+    console.log("Request Sent");
+    const result = yield (ipcRenderer.invoke('user-data', 'Sid'));
     yield put(setPouchDBResponse(result));
 }
 
